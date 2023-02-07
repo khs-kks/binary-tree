@@ -109,6 +109,20 @@ class Tree {
     }
     return null;
   }
+
+  levelOrder(fn = null) {
+    let result = [];
+    let queue = [];
+    if (this.root) queue.push(this.root);
+    while (queue.length) {
+      let node = queue.shift();
+      if (fn) fn(node);
+      result.push(node.data);
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+    return fn ? null : result;
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -126,7 +140,8 @@ const tree = new Tree(values);
 tree.buildTree(values);
 prettyPrint(tree.root);
 
-tree.insert(24);
-tree.delete(67);
+// tree.insert(24);
+// tree.delete(67);
 // prettyPrint(tree.root);
-console.log(tree.find(35));
+// console.log(tree.find(35));
+console.log(tree.levelOrder());
