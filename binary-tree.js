@@ -99,6 +99,16 @@ class Tree {
     while (node.left) node = node.left;
     return node;
   }
+
+  find(value) {
+    let currentNode = this.root;
+    while (currentNode) {
+      if (currentNode.data === value) return currentNode;
+      else if (currentNode.data < value) currentNode = currentNode.right;
+      else currentNode = currentNode.left;
+    }
+    return null;
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -118,4 +128,5 @@ prettyPrint(tree.root);
 
 tree.insert(24);
 tree.delete(67);
-prettyPrint(tree.root);
+// prettyPrint(tree.root);
+console.log(tree.find(35));
