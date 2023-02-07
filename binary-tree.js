@@ -6,36 +6,20 @@ class Node {
   }
 }
 
-// class Tree {
-//   constructor(values) {
-//     this.root = null;
-//     this.values = values;
-//   }
-
-//   buildTree(arr) {
-//     const sortedAndUnique = [...new Set(arr)].sort((a, b) => a - b);
-
-//     const build = (start, end) => {
-//       if (start > end) return null;
-//       const mid = Math.floor((start + end) / 2);
-//       const node = new Node(sortedAndUnique[mid]);
-//       node.left = build(start, mid - 1);
-//       node.right = build(mid + 1, end);
-//       return node;
-//     };
-
-//     this.root = build(0, sortedAndUnique.length - 1);
-//     return this.root;
-//   }
-// }
-
 class Tree {
   constructor(values) {
+    if (!Array.isArray(values)) {
+      throw new Error("Values must be an array");
+    }
+
     this.root = null;
     this.values = values;
   }
 
   buildTree() {
+    if (this.values.length === 0) {
+      return null;
+    }
     this.values = [...new Set(this.values)].sort((a, b) => a - b);
     this.root = this._buildTree(0, this.values.length - 1);
     return this.root;
