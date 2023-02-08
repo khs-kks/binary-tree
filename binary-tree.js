@@ -176,6 +176,26 @@ class Tree {
     }
     return -1;
   }
+
+  _height(node) {
+    if (!node) {
+      return -1;
+    }
+    return 1 + Math.max(this._height(node.left), this._height(node.right));
+  }
+
+  isBalanced(node = this.root) {
+    if (!node) {
+      return true;
+    }
+    const heightDiff = Math.abs(
+      this._height(node.left) - this._height(node.right)
+    );
+    if (heightDiff > 1) {
+      return false;
+    }
+    return this.isBalanced(node.left) && this.isBalanced(node.right);
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -196,6 +216,4 @@ prettyPrint(tree.root);
 // tree.insert(24);
 // tree.delete(67);
 // prettyPrint(tree.root);
-const node = tree.find(23);
-console.log(node);
-console.log(tree.depth(node));
+console.log(tree.isBalanced());
