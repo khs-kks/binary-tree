@@ -158,6 +158,24 @@ class Tree {
 
     return Math.max(leftHeight, rightHeight) + 1;
   }
+
+  depth(node) {
+    if (node === this.root) return 0;
+    let current = this.root;
+    let depth = 0;
+    while (current) {
+      if (node.data < current.data) {
+        current = current.left;
+        depth++;
+      } else if (node.data > current.data) {
+        current = current.right;
+        depth++;
+      } else {
+        return depth;
+      }
+    }
+    return -1;
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -172,11 +190,12 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 
 const values = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 23, 324];
 const tree = new Tree(values);
-tree.buildTree(values);
+tree.buildTree();
 prettyPrint(tree.root);
 
 // tree.insert(24);
 // tree.delete(67);
 // prettyPrint(tree.root);
-// console.log(tree.find(35));
-console.log(tree.postorder());
+const node = tree.find(23);
+console.log(node);
+console.log(tree.depth(node));
