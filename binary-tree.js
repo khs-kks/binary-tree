@@ -107,6 +107,48 @@ class Tree {
     }
     return fn ? null : result;
   }
+
+  inorder(fn) {
+    let result = [];
+    this._inorder(this.root, fn, result);
+    return result;
+  }
+
+  _inorder(node, fn, result) {
+    if (!node) return;
+    this._inorder(node.left, fn, result);
+    result.push(node.data);
+    if (fn) fn(node);
+    this._inorder(node.right, fn, result);
+  }
+
+  preorder(fn) {
+    let result = [];
+    this._preorder(this.root, fn, result);
+    return result;
+  }
+
+  _preorder(node, fn, result) {
+    if (!node) return;
+    result.push(node.data);
+    if (fn) fn(node);
+    this._preorder(node.left, fn, result);
+    this._preorder(node.right, fn, result);
+  }
+
+  postorder(fn) {
+    let result = [];
+    this._postorder(this.root, fn, result);
+    return result;
+  }
+
+  _postorder(node, fn, result) {
+    if (!node) return;
+    this._postorder(node.left, fn, result);
+    this._postorder(node.right, fn, result);
+    result.push(node.data);
+    if (fn) fn(node);
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
