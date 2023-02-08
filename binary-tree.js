@@ -196,6 +196,11 @@ class Tree {
     }
     return this.isBalanced(node.left) && this.isBalanced(node.right);
   }
+
+  rebalance() {
+    this.values = [...new Set(this.values)].sort((a, b) => a - b);
+    this.root = this._buildTree(0, this.values.length - 1);
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -208,7 +213,7 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
-const values = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 23, 324];
+const values = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 23, 324, 999, 9999, 99999];
 const tree = new Tree(values);
 tree.buildTree();
 prettyPrint(tree.root);
