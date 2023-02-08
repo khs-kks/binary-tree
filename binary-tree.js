@@ -149,6 +149,15 @@ class Tree {
     result.push(node.data);
     if (fn) fn(node);
   }
+
+  height(node) {
+    if (node === null) return 0;
+
+    let leftHeight = this.height(node.left);
+    let rightHeight = this.height(node.right);
+
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -170,4 +179,4 @@ prettyPrint(tree.root);
 // tree.delete(67);
 // prettyPrint(tree.root);
 // console.log(tree.find(35));
-console.log(tree.levelOrder());
+console.log(tree.postorder());
