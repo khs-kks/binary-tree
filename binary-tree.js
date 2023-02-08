@@ -213,12 +213,26 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
-const values = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 23, 324, 999, 9999, 99999];
-const tree = new Tree(values);
+const arr = Array.from({ length: 15 }, () => Math.floor(Math.random() * 100));
+const tree = new Tree(arr);
 tree.buildTree();
-prettyPrint(tree.root);
 
-// tree.insert(24);
-// tree.delete(67);
-// prettyPrint(tree.root);
-console.log(tree.isBalanced());
+console.log("Is balanced: ", tree.isBalanced());
+console.log("Level order: ", tree.levelOrder());
+console.log("Pre order: ", tree.preorder());
+console.log("Post order: ", tree.postorder());
+console.log("In order: ", tree.inorder());
+
+for (let i = 0; i < 5; i++) {
+  tree.insert(Math.floor(Math.random() * 200) + 100);
+}
+
+console.log("Is balanced: ", tree.isBalanced());
+
+tree.rebalance();
+
+console.log("Is balanced: ", tree.isBalanced());
+console.log("Level order: ", tree.levelOrder());
+console.log("Pre order: ", tree.preorder());
+console.log("Post order: ", tree.postorder());
+console.log("In order: ", tree.inorder());
